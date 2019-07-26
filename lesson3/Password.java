@@ -1,76 +1,48 @@
 package lesson3;
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
+
 public class Password {
 
-    public static void validPassword(String password) {
-        if (password.length() < 20 || 8 > password.length()) {
-            boolean proverka = false;
-            boolean resSpec1 = false;
-            boolean resProp2 = false;
-            boolean resNumber3 = false;
-            String str = password;
-
-
-            char[] arrChar = new char[]{'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A',
-                    'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'};
-            char[] arrNumber = new char[]{'1', '2', '3', '4', '5', '6', '7', '8', '9'};
-            char[] arrSpecSimb = new char[]{'!', '@', '#', '$', '%', '^', '&', '*'};
-            char[] result = str.toCharArray();
-
-            for (Character o : result) {
-                boolean resSpec = false;
-                boolean resProp = false;
-
-                for (Character m : arrSpecSimb) {
-                    if (m == o) {
-                        resSpec = true;
-                        resSpec1 = true;
-                        break;
-                    }
-                }
-                if (!resSpec) {
-                    for (Character m : arrChar) {
-                        if (m == o) {
-                            resProp = true;
-                            resProp2 = true;
-                            break;
-                        }
-                    }
-                }
-                if (!resSpec || !resProp) {
-                    for (Character m : arrNumber) {
-                        if (m == o) {
-
-                            resNumber3 = true;
-                            break;
+    public static boolean validPassword(String password) {
+        boolean res = false;
+        Pattern p = Pattern.compile("^.{8,20}$");
+        Matcher m = p.matcher(password);
+        if (m.matches()) {
+            Pattern p1 = Pattern.compile("^.*[A-Z]+.*$");
+            Matcher m1 = p1.matcher(password);
+            if (m1.matches()) {
+                Pattern p2 = Pattern.compile("^.*[a-z]+.*$");
+                Matcher m2 = p2.matcher(password);
+                if (m2.matches()) {
+                    Pattern p3 = Pattern.compile("^.*[0-9]+.*$");
+                    Matcher m3 = p3.matcher(password);
+                    if (m3.matches()) {
+                        Pattern p4 = Pattern.compile("^.*[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]+.*$");
+                        Matcher m4 = p4.matcher(password);
+                        if (m4.matches()) {
+                            res = true;
                         }
 
                     }
                 }
-                if (resNumber3 && resProp2 && resSpec1) {
-                    proverka = true;
-
-                    break;
-
-                }
-
-
             }
-
-
-            if (proverka)
-                System.out.println("Пароль прошел проверку");
-            else System.out.println("Пароль не прошел проверку");
-
-
         }
+        return res;
     }
 
 
     public static void main(String[] args) {
-    validPassword("Sfg@1");
-}
-}
+        if (validPassword("Sfg1sdfgsdsd")) {
+            System.out.println("Пароль прошел проверку");
+        } else{
+        System.out.println("Пароль не прошел проверку");
+        }
 
+    }
+}
 
