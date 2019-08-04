@@ -6,8 +6,15 @@
                           -fx-background-insets: 0, 0 1 1 0;
                           -fx-padding: 2 2 2 2;
 }
-
-
+#but, #but1 {
+-fx-padding : 1 1 1 1 ;
+}
+.label {
+    -fx-background-color: transparent;
+     -fx-text-fill: white;
+            -fx-font-family: "Arial Bold Narrow";
+            -fx-font-weight: bold;
+    }
 .button {
         -fx-text-fill: white;
         -fx-font-family: "Arial Narrow";

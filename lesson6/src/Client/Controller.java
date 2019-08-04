@@ -43,6 +43,8 @@ boolean isconserv = true;
 
     final String IP_ADRES = "localhost";
     final int PORT = 50105;
+
+
 void vnutrinit(){
 
     try {
@@ -57,15 +59,9 @@ void vnutrinit(){
                     while (true) {
                         if (!socket.isClosed()) {
                             String str = in.readUTF();
-//                            Pattern p = Pattern.compile("^coneri###\\d*");
-//                            Matcher m = p.matcher(str);
-//                            //System.out.println(m.matches());
-//                            if (m.matches()){
-//                               // System.out.println(m.matches());
-//                                out.writeUTF(str);
-//                            } else {
+
                                 textArea.appendText(str + "\n");
-                          //  }
+
                             if (str.equals("/serverClosed")) {
                                 clientdisconect();
                             }
@@ -73,7 +69,8 @@ void vnutrinit(){
                         } else break;
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
+                    textArea.appendText("Связь с сервером потеряна" + "\n");
                 } finally {
 
                     clientdisconect();
@@ -92,7 +89,7 @@ if (textField.getText().equals("/end")){
     textArea.appendText("/end \n");
 }
         if (textField.getText().equals("/start")){
-
+            clientdisconect();
             vnutrinit();
 
         }
@@ -106,7 +103,7 @@ if (textField.getText().equals("/end")){
 
             } catch (IOException e) {
                 textArea.appendText("Нет связи (/start - для запуска) \n");
-                //e.printStackTrace();
+
             }
            // JOptionPane.showMessageDialog(null, "Ошибка отправки сообщения");
         } else textArea.appendText("Нет связи \n");

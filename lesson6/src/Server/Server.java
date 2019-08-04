@@ -2,6 +2,7 @@ package Server;
 
 
 import java.io.IOException;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -12,25 +13,9 @@ public class Server {
 
     public  void deleteClient(ClientHandler o) {
 
-                clients.remove(o);
-        
-
-    }
-
-
-    public void deClient( ) {
-
-            for (ClientHandler o: clients) {
-                if (o.getNoSocket()){
-                    clients.remove(o);
-                    o.getSocket();
-                    System.out.println("Клиент отключен : "+o);
-                    System.out.println("Размер коллекции : "+  clients.size());
-                }
-            }
-
+            clients.remove(o);
+        System.out.println("Клиент удален");
         }
-
 
 
     public Server() {
@@ -84,7 +69,7 @@ public class Server {
 
             o.sendMsg(msg);
         }
-        System.out.println("Количество клиентов на связи : " + clients.size());
+
     }
 
 
