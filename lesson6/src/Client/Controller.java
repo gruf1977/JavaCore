@@ -89,8 +89,19 @@ if (textField.getText().equals("/end")){
     textArea.appendText("/end \n");
 }
         if (textField.getText().equals("/start")){
-            clientdisconect();
-            vnutrinit();
+            try {
+                clientdisconect();
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                vnutrinit();
+            }catch (RuntimeException e) {
+               // textArea.appendText("Нет связи с сервером! \n");
+            }
 
         }
         if (isconserv) {
@@ -137,11 +148,6 @@ if (textField.getText().equals("/end")){
         stage.close();
     }
 
-
-
-
-
-
     }
 
     @Override
@@ -150,38 +156,19 @@ if (textField.getText().equals("/end")){
     }
 
     public void clientdisconect(){
-                        try
+    try
 
     {
         in.close();
-    } catch(
-    IOException e)
-
-    {
-        e.printStackTrace();
-    }
-                        try
-
-    {
         out.close();
-    } catch(
-    IOException e)
-
-    {
-        e.printStackTrace();
-    }
-                        try
-
-    {
-
-
         socket.close();
-    } catch(
-    IOException e)
+    } catch(IOException e)
 
     {
-        e.printStackTrace();
+       // e.printStackTrace();
+        textArea.appendText("Нет связи с сервером! \n");
     }
+
 }
 
     }
